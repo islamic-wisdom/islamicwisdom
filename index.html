@@ -318,10 +318,12 @@
     .popular-header { text-align:center; margin-bottom:2.5rem; }
     .popular-tag { display:inline-flex; align-items:center; gap:0.4rem; padding:0.35rem 0.95rem; margin-bottom:0.9rem; border-radius:50px; background:var(--madder); color:#fff; font-size:0.72rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; box-shadow:0 4px 14px rgba(162,51,43,0.28); }
     [data-theme="dark"] .popular-tag { color:#0B1322; }
-    .popular-card { max-width:880px; margin:0 auto; }
+    .popular-card { max-width:800px; margin:0 auto; }
     .popular-card:hover { transform:translateY(-4px); }
-    .popular-media { position:relative; width:100%; aspect-ratio:16/9; background:#000; }
-    .popular-media iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+    .popular-media { position:relative; width:100%; min-height:240px; padding:1.25rem 1.25rem 0; display:flex; justify-content:center; }
+    .popular-media .fb-post { width:100%; max-width:750px; }
+    .popular-media .fb-post, .popular-media .fb-post span, .popular-media .fb-post iframe { width:100% !important; }
+    .popular-media .fb-post iframe { border-radius:14px; background:#fff; }
     .popular-card .video-body { flex-direction:row; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding:1.25rem 1.5rem; }
     .popular-card .video-desc { margin:0; flex:1 1 280px; }
     .popular-card .video-action-btn { margin-top:0; }
@@ -340,8 +342,30 @@
     .latest-date { font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--text3); margin-bottom:0.35rem; }
     .latest-skeleton { border-radius:20px; aspect-ratio:4/3; background:var(--bg-card); border:1px solid var(--border); animation:skeletonPulse 1.4s ease-in-out infinite; }
     @keyframes skeletonPulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-    .latest-fallback { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; gap:1.25rem; }
-    .latest-fallback iframe { width:100%; max-width:500px; height:640px; border:0; border-radius:16px; background:var(--bg-card-solid); box-shadow:var(--shadow); }
+    .latest-fallback { grid-column:1/-1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,500px); gap:2.5rem; align-items:center; padding:2.25rem; background:var(--bg-card); border:1px solid var(--border); border-radius:24px; box-shadow:var(--shadow-lg); position:relative; overflow:hidden; }
+    .latest-fallback::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#1877F2,var(--accent-2),var(--accent)); }
+    .latest-intro { display:flex; flex-direction:column; gap:1rem; }
+    .latest-fb-icon { width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#1877F2,#42A1FF); color:#fff; box-shadow:0 8px 22px rgba(24,119,242,0.3); }
+    .latest-intro h3 { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:700; color:var(--text1); line-height:1.15; }
+    .latest-intro h3 small { display:block; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--text3); margin-top:0.35rem; }
+    .latest-intro p { font-size:0.95rem; color:var(--text2); line-height:1.8; }
+    .latest-intro ul { display:flex; flex-direction:column; gap:0.45rem; }
+    .latest-intro li { position:relative; padding-left:1.2rem; font-size:0.9rem; color:var(--text2); }
+    .latest-intro li::before { content:'✦'; position:absolute; left:0; top:0.05rem; font-size:0.65rem; color:var(--accent); }
+    .latest-intro-actions { display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem; }
+    .latest-intro-actions .video-action-btn { margin-top:0; }
+    .video-action-outline { color:var(--accent); border:1.5px solid var(--border); background:transparent; }
+    .video-action-outline:hover { border-color:var(--accent); background:rgba(var(--accent-rgb),0.08); transform:translateY(-2px); }
+    .latest-feed { width:100%; border-radius:18px; overflow:hidden; border:1px solid var(--border); background:#fff; box-shadow:var(--shadow); }
+    .latest-feed iframe { display:block; width:100%; height:560px; border:0; }
+    .latest-more[hidden] { display:none; }
+    @media (max-width:900px) {
+      .latest-fallback { grid-template-columns:1fr; padding:1.5rem; gap:1.75rem; }
+      .latest-intro { text-align:center; align-items:center; }
+      .latest-intro ul { align-items:flex-start; text-align:left; }
+      .latest-intro-actions { justify-content:center; }
+      .latest-feed { max-width:500px; margin:0 auto; }
+    }
     .latest-more { display:flex; justify-content:center; margin-top:2.25rem; }
     .latest-more .video-action-btn { padding:0.8rem 1.6rem; font-size:0.88rem; }
 
@@ -429,6 +453,9 @@
   </style>
 </head>
 <body>
+<!-- Facebook SDK: renders the embedded post in the Popular section -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v23.0"></script>
 <!-- Brand mark: mihrab arch, open book, lamp flame -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="wisdom-mark" viewBox="0 0 60 60">
@@ -580,7 +607,8 @@
 
     <article class="video-card popular-card reveal">
       <div class="popular-media">
-        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fwisdomacadmy%2Fposts%2F1590450186431636%2F&amp;show_text=false&amp;width=1280" title="Popular video with Wasim Faizi" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+        <!-- Facebook embedded post (rendered by the Facebook SDK loaded at the top of <body>) -->
+        <div class="fb-post" data-href="https://www.facebook.com/wisdomacadmy/posts/1590450186431636/" data-show-text="false" data-lazy="true"></div>
       </div>
       <div class="video-body">
         <p class="video-desc">Shared on the Wisdom Academy Layyah Facebook page.</p>
@@ -1053,14 +1081,36 @@
     // Until the data file has videos, show Facebook's own page feed (free, no token needed)
     const showFallback = () => {
       const box = el('div', 'latest-fallback');
+
+      // Left: branded intro in the site's own style
+      const intro = el('div', 'latest-intro');
+      const icon = el('div', 'latest-fb-icon');
+      icon.innerHTML = FB_ICON.replace(/width="15" height="15"/, 'width="28" height="28"');
+      const h = el('h3', null, 'Wisdom Academy Layyah');
+      h.append(el('small', null, 'On Facebook'));
+      const list = el('ul');
+      ['Lectures and short reminders', 'Quranic reflections', 'New videos every week'].forEach((t) => list.append(el('li', null, t)));
+      const actions = el('div', 'latest-intro-actions');
+      const follow = el('a', 'video-action-btn video-action-outline', 'Follow the page');
+      follow.href = FB_PAGE; follow.target = '_blank'; follow.rel = 'noopener noreferrer';
+      actions.append(fbButton(FB_PAGE + '/videos', 'Watch all videos'), follow);
+      intro.append(icon, h, el('p', null, 'Catch the newest lectures and reminders from Wisdom Academy Layyah, straight from their Facebook page.'), list, actions);
+
+      // Right: Facebook's page feed inside a framed card
+      const feed = el('div', 'latest-feed');
+      box.append(intro, feed);
+      grid.replaceChildren(box);
+      const more = document.querySelector('.latest-more');
+      if (more) more.hidden = true;
+
+      const w = Math.round(Math.min(500, Math.max(180, feed.clientWidth || 500)));
       const frame = document.createElement('iframe');
       frame.src = 'https://www.facebook.com/plugins/page.php?href=' + encodeURIComponent(FB_PAGE) +
-        '&tabs=timeline&width=500&height=640&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false';
+        '&tabs=timeline&width=' + w + '&height=560&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false';
       frame.title = 'Wisdom Academy Layyah on Facebook';
       frame.loading = 'lazy';
       frame.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
-      box.append(frame);
-      grid.replaceChildren(box);
+      feed.append(frame);
     };
 
     fetch('data/latest-videos.json', { cache: 'no-cache' })
