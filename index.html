@@ -33,6 +33,17 @@
     ul { list-style: none; }
     button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
+    /* ============================================================ FONTS */
+    /* Noori Nastaleeq for Quranic Arabic and Urdu translations.
+       Uses the visitor's installed copy first, then fonts/ in this site; otherwise falls back to Noto Nastaliq Urdu. */
+    @font-face {
+      font-family: 'Noori Nastaleeq';
+      src: local('Jameel Noori Nastaleeq'), local('JameelNooriNastaleeq'), local('Noori Nastaleeq'), local('NooriNastaleeq'),
+           url('fonts/jameel-noori-nastaleeq.woff2') format('woff2'),
+           url('fonts/jameel-noori-nastaleeq.ttf') format('truetype');
+      font-display: swap;
+    }
+
     /* ============================================================ VARIABLES (DAY / NIGHT) */
     :root {
       /* Multani Kashi: chalk plaster, cobalt & firozi glaze, madder (ajrak) rubrication */
@@ -152,7 +163,13 @@
     .hero-glow-r { position:absolute; bottom:5%; right:-5%; width:50%; height:50%; background:radial-gradient(ellipse,rgba(var(--accent-rgb),0.09) 0%,transparent 70%); pointer-events:none; }
     .hero-logo-bg { position:absolute; right:5%; top:50%; transform:translateY(-50%); opacity:0.07; animation:floatY 9s ease-in-out infinite; pointer-events:none; }
     @keyframes floatY { 0%,100%{transform:translateY(-50%) translateY(0)} 50%{transform:translateY(-50%) translateY(-18px)} }
-    .hero-content { position:relative; z-index:2; text-align:center; max-width:800px; padding-bottom:2rem; }
+    .hero-grid { position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr); gap:4rem; align-items:center; }
+    .hero-content { position:relative; z-index:2; text-align:left; padding-bottom:2rem; }
+    .hero-portrait { position:relative; z-index:2; animation:fadeUp 0.8s ease 0.35s both; }
+    .hero-portrait .author-frame { max-width:340px; margin:0 auto; }
+    .hero-portrait-caption { margin-top:1.4rem; text-align:center; }
+    .hero-portrait-caption .author-name { font-size:1.6rem; }
+    .hero-portrait-caption .author-name-ur { font-size:1rem; }
 
     .hero-pre { display:inline-flex; align-items:center; gap:0.5rem; padding:0.45rem 1.25rem; background:rgba(var(--accent-rgb),0.08); border:1px solid var(--border); border-radius:50px; font-family:'Amiri',serif; font-size:0.95rem; color:var(--accent); margin-bottom:1.25rem; animation:fadeUp 0.7s ease 0.1s both; }
     .hero-dot { width:6px; height:6px; border-radius:50%; background:var(--madder); animation:pulse 2s ease-in-out infinite; }
@@ -165,10 +182,10 @@
     .hero-author { display:inline-block; margin-top:0.5rem; font-size:0.95rem; letter-spacing:0.03em; color:var(--text2); animation:fadeUp 0.7s ease 0.4s both; transition:color 0.2s; }
     .hero-author strong { color:var(--accent); font-weight:600; }
     .hero-author:hover { color:var(--text1); }
-    .hero-desc { font-size:1rem; color:var(--text2); line-height:1.8; max-width:560px; margin:1.5rem auto 2rem; animation:fadeUp 0.7s ease 0.5s both; }
+    .hero-desc { font-size:1rem; color:var(--text2); line-height:1.8; max-width:560px; margin:1.5rem 0 2rem; animation:fadeUp 0.7s ease 0.5s both; }
 
     /* Social Buttons */
-    .hero-socials { display:flex; align-items:center; justify-content:center; gap:1rem; flex-wrap:wrap; animation:fadeUp 0.7s ease 0.6s both; }
+    .hero-socials { display:flex; align-items:center; justify-content:flex-start; gap:1rem; flex-wrap:wrap; animation:fadeUp 0.7s ease 0.6s both; }
     .social-btn { display:inline-flex; align-items:center; gap:0.6rem; padding:0.8rem 1.5rem; border-radius:50px; font-size:0.9rem; font-weight:600; letter-spacing:0.03em; transition:all 0.3s ease; border:1.5px solid transparent; }
     .social-btn:hover { transform:translateY(-3px); }
     .btn-youtube { background:linear-gradient(135deg,#CC0000,#FF3333); color:#fff; box-shadow:0 4px 18px rgba(204,0,0,0.3); }
@@ -179,7 +196,7 @@
     .btn-facebook:hover { box-shadow:0 8px 28px rgba(24,119,242,0.48); }
 
     /* Stats Row */
-    .hero-stat-row { display:flex; align-items:center; justify-content:center; gap:2rem; padding:1.25rem 2.5rem; background:var(--bg-stat-row); border:1px solid var(--border); border-radius:14px; backdrop-filter:blur(10px); box-shadow:var(--shadow); margin-top:2rem; animation:fadeUp 0.7s ease 0.7s both; transition:background 0.35s ease, border-color 0.35s ease; }
+    .hero-stat-row { display:inline-flex; align-items:center; justify-content:center; gap:2rem; padding:1.25rem 2.5rem; background:var(--bg-stat-row); border:1px solid var(--border); border-radius:14px; backdrop-filter:blur(10px); box-shadow:var(--shadow); margin-top:2rem; animation:fadeUp 0.7s ease 0.7s both; transition:background 0.35s ease, border-color 0.35s ease; }
     .hero-stat { text-align:center; }
     .stat-num { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:700; color:var(--accent); line-height:1; }
     .stat-lbl { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--text3); font-weight:600; }
@@ -189,9 +206,9 @@
     .quote-banner { padding:5rem 0; background:var(--bg-sec); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); position:relative; overflow:hidden; transition:background 0.35s ease; }
     .quote-inner { text-align:center; max-width:700px; margin:0 auto; position:relative; }
     .quote-ornament { font-family:'Amiri',serif; font-size:4rem; color:rgba(var(--accent-rgb),0.15); line-height:1; margin-bottom:0.5rem; }
-    .quote-arabic { font-family:'Scheherazade New','Amiri',serif; font-size:clamp(1.5rem,3vw,2rem); color:var(--arabic-text); direction:rtl; line-height:2.2; margin-bottom:1.25rem; }
+    .quote-arabic { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu','Scheherazade New',serif; font-size:clamp(1.5rem,3vw,2rem); color:var(--arabic-text); direction:rtl; line-height:2.2; margin-bottom:1.25rem; }
     .quote-translation { font-family:'Cormorant Garamond',serif; font-size:clamp(1.1rem,2vw,1.4rem); font-style:italic; color:var(--text2); line-height:1.7; margin-bottom:0.875rem; }
-    .quote-urdu { font-family:'Noto Nastaliq Urdu',serif; font-size:clamp(1rem,1.8vw,1.2rem); color:var(--text1); direction:rtl; line-height:2.4; margin-bottom:1rem; }
+    .quote-urdu { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu','Scheherazade New',serif; font-size:clamp(1rem,1.8vw,1.2rem); color:var(--text1); direction:rtl; line-height:2.4; margin-bottom:1rem; }
     .quote-ref { font-size:0.8rem; color:var(--accent); font-weight:600; letter-spacing:0.08em; }
 
     /* ============================================================ ABOUT */
@@ -255,23 +272,20 @@
     .ayat-header { text-align:center; margin-bottom:3.5rem; }
     .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,2.8rem); font-weight:700; color:var(--text1); line-height:1.2; }
     .section-sub { font-size:1rem; color:var(--text2); margin-top:0.5rem; max-width:500px; margin-left:auto; margin-right:auto; }
-    .ayat-list { display:flex; flex-direction:column; gap:1.25rem; max-width:880px; margin:0 auto; }
     .ayat-card { background:var(--bg-card); border:1px solid var(--border); border-radius:18px; padding:1.75rem 2rem; box-shadow:var(--shadow); transition:all 0.4s ease; position:relative; overflow:hidden; }
     .ayat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,rgba(var(--accent-rgb),0.5),transparent); opacity:0; transition:opacity 0.3s; }
     .ayat-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); border-color:var(--accent-2); background:var(--bg-card-solid); }
     .ayat-card:hover::before { opacity:1; }
     .ayat-num { display:inline-flex; align-items:center; justify-content:center; min-width:2.25rem; height:2.25rem; padding:0 0.5rem; border:1.5px solid var(--madder); border-radius:50%; font-size:0.85rem; color:var(--madder); font-weight:600; }
-    .ayat-arabic { font-family:'Scheherazade New','Amiri',serif; font-size:clamp(1.8rem,4vw,2.4rem); line-height:2.1; color:var(--arabic-text); direction:rtl; text-align:right; margin:0.25rem 0 1rem; }
+    .ayat-arabic { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu','Scheherazade New',serif; font-size:clamp(1.8rem,4vw,2.4rem); line-height:2.6; color:var(--arabic-text); direction:rtl; text-align:right; margin:0.25rem 0 1rem; }
     .ayat-divider { text-align:center; color:var(--madder); opacity:0.55; font-size:0.9rem; margin:0.75rem 0; letter-spacing:0.3em; }
     .ayat-lang { display:block; font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text3); margin-bottom:0.35rem; }
     .ayat-translation { font-style:italic; font-size:0.98rem; color:var(--text2); line-height:1.8; margin-bottom:1.1rem; }
-    .ayat-urdu { font-family:'Noto Nastaliq Urdu',serif; font-size:1.05rem; line-height:2.5; color:var(--text1); direction:rtl; text-align:right; margin-bottom:1rem; }
+    .ayat-urdu { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu','Scheherazade New',serif; font-size:1.05rem; line-height:2.5; color:var(--text1); direction:rtl; text-align:right; margin-bottom:1rem; }
     .ayat-urdu .ayat-lang { text-align:right; font-family:'Inter',sans-serif; letter-spacing:0.05em; }
     .ayat-ref { display:flex; align-items:center; gap:0.6rem; font-size:0.75rem; color:var(--accent); font-weight:600; letter-spacing:0.06em; }
     .ayat-ref-bar { width:18px; height:2px; background:var(--accent); border-radius:1px; flex-shrink:0; }
-    .ayat-note { max-width:880px; margin:1.5rem auto 0; padding:1.25rem 1.75rem; border-right:3px solid var(--accent); border-radius:12px; background:var(--bg-card); font-family:'Noto Nastaliq Urdu',serif; font-size:0.92rem; line-height:2.4; color:var(--text2); direction:rtl; text-align:right; }
     .ayat-source { max-width:880px; margin:1rem auto 0; text-align:center; font-size:0.78rem; color:var(--text3); }
-    .ayat-header--second { margin-top:5rem; }
     .ayat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; align-items:start; }
     .ayat-grid .ayat-arabic { font-size:clamp(1.5rem,3vw,1.9rem); }
     .ayat-num--surah { border-radius:999px; padding:0 0.9rem; font-size:0.78rem; letter-spacing:0.04em; }
@@ -298,6 +312,38 @@
     [data-theme="dark"] .video-action-tt { background:rgba(255,255,255,0.06); }
     .video-action-tt:hover { background:#000; color:#fff; transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,0.3); }
     [data-theme="dark"] .video-action-tt:hover { background:#fff; color:#000; }
+
+    /* ============================================================ POPULAR VIDEO */
+    .popular-section { padding:5.5rem 0; background:var(--bg-page); position:relative; overflow:hidden; border-top:1px solid var(--border-subtle); transition:background 0.35s ease; }
+    .popular-header { text-align:center; margin-bottom:2.5rem; }
+    .popular-tag { display:inline-flex; align-items:center; gap:0.4rem; padding:0.35rem 0.95rem; margin-bottom:0.9rem; border-radius:50px; background:var(--madder); color:#fff; font-size:0.72rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; box-shadow:0 4px 14px rgba(162,51,43,0.28); }
+    [data-theme="dark"] .popular-tag { color:#0B1322; }
+    .popular-card { max-width:880px; margin:0 auto; }
+    .popular-card:hover { transform:translateY(-4px); }
+    .popular-media { position:relative; width:100%; aspect-ratio:16/9; background:#000; }
+    .popular-media iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+    .popular-card .video-body { flex-direction:row; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding:1.25rem 1.5rem; }
+    .popular-card .video-desc { margin:0; flex:1 1 280px; }
+    .popular-card .video-action-btn { margin-top:0; }
+    .video-action-fb { background:linear-gradient(135deg,#1877F2,#42A1FF); color:#fff; box-shadow:0 4px 14px rgba(24,119,242,0.3); }
+    .video-action-fb:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(24,119,242,0.45); }
+
+    /* ============================================================ LATEST FROM WISDOM */
+    .latest-section { padding:5.5rem 0; background:var(--bg-sec); position:relative; overflow:hidden; border-top:1px solid var(--border-subtle); transition:background 0.35s ease; }
+    .latest-header { text-align:center; margin-bottom:2.5rem; }
+    .latest-tag { background:var(--accent-2); box-shadow:0 4px 14px rgba(var(--accent2-rgb),0.3); }
+    .latest-grid { position:relative; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; align-items:start; }
+    .latest-media { position:relative; width:100%; aspect-ratio:16/9; background:#000; }
+    .latest-media iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+    .latest-card .video-body { padding:1.15rem 1.25rem 1.3rem; }
+    .latest-card .video-title { font-size:1.15rem; margin-bottom:1rem; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .latest-date { font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--text3); margin-bottom:0.35rem; }
+    .latest-skeleton { border-radius:20px; aspect-ratio:4/3; background:var(--bg-card); border:1px solid var(--border); animation:skeletonPulse 1.4s ease-in-out infinite; }
+    @keyframes skeletonPulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    .latest-fallback { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; gap:1.25rem; }
+    .latest-fallback iframe { width:100%; max-width:500px; height:640px; border:0; border-radius:16px; background:var(--bg-card-solid); box-shadow:var(--shadow); }
+    .latest-more { display:flex; justify-content:center; margin-top:2.25rem; }
+    .latest-more .video-action-btn { padding:0.8rem 1.6rem; font-size:0.88rem; }
 
     /* ============================================================ CONNECT */
     .connect-section { padding:6rem 0; background:var(--bg-connect); position:relative; overflow:hidden; transition:background 0.35s ease; }
@@ -348,6 +394,15 @@
     .reveal.visible { opacity:1; transform:translateY(0); }
 
     /* ============================================================ RESPONSIVE */
+    @media (max-width:900px) {
+      .hero-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .hero-portrait { order:-1; }
+      .hero-portrait .author-frame { max-width:240px; }
+      .hero-content { text-align:center; }
+      .hero-desc { margin:1.5rem auto 2rem; }
+      .hero-socials { justify-content:center; }
+      .hero-logo-bg { display:none; }
+    }
     @media (max-width:1024px) {
       .connect-grid { grid-template-columns:1fr; max-width:480px; margin:0 auto; }
       .about-grid { grid-template-columns:1fr; }
@@ -451,6 +506,7 @@
   <svg class="hero-logo-bg" width="420" height="420" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><use href="#wisdom-mark"/></svg>
 
   <div class="container">
+    <div class="hero-grid">
     <div class="hero-content">
       <div class="hero-pre">
         <div class="hero-dot"></div>
@@ -493,6 +549,75 @@
         <div class="stat-div"></div>
         <div class="hero-stat"><div class="stat-num">Daily</div><div class="stat-lbl">Reflections</div></div>
       </div>
+    </div>
+
+    <!-- Author portrait -->
+    <a href="#author" class="hero-portrait" aria-label="About Wasim Faizi">
+      <div class="author-frame">
+        <img src="images/waseem-faizi.jpg" alt="Portrait of Wasim Faizi" width="381" height="527" fetchpriority="high" />
+      </div>
+      <div class="hero-portrait-caption">
+        <div class="author-name">Wasim Faizi</div>
+        <div class="author-name-ur" lang="ur">وسیم فیضی</div>
+      </div>
+    </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ POPULAR VIDEO -->
+<section class="popular-section" id="popular">
+  <div class="star-pattern"></div>
+  <div class="container">
+    <div class="popular-header reveal">
+      <div class="popular-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7L12 17.4 5.8 21.1l1.6-7L2 9.3l7.1-.7z"/></svg>
+        Popular
+      </div>
+      <h2 class="section-title">Popular <span class="accent-text">Video</span></h2>
+      <p class="section-sub">Our most-watched video with Wasim Faizi.</p>
+    </div>
+
+    <article class="video-card popular-card reveal">
+      <div class="popular-media">
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fwisdomacadmy%2Fposts%2F1590450186431636%2F&amp;show_text=false&amp;width=1280" title="Popular video with Wasim Faizi" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="video-body">
+        <p class="video-desc">Shared on the Wisdom Academy Layyah Facebook page.</p>
+        <a href="https://www.facebook.com/share/19zrdZDFD8/" target="_blank" rel="noopener noreferrer" class="video-action-btn video-action-fb">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Watch on Facebook
+        </a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================ LATEST FROM WISDOM -->
+<!-- Videos come from data/latest-videos.json, refreshed by .github/workflows/latest-videos.yml -->
+<section class="latest-section" id="latest">
+  <div class="star-pattern"></div>
+  <div class="container">
+    <div class="latest-header reveal">
+      <div class="popular-tag latest-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Latest
+      </div>
+      <h2 class="section-title">Latest from <span class="accent-text">Wisdom</span></h2>
+      <p class="section-sub">The three newest videos from Wisdom Academy Layyah on Facebook.</p>
+    </div>
+
+    <div class="latest-grid" id="latest-grid" aria-live="polite">
+      <div class="latest-skeleton" aria-hidden="true"></div>
+      <div class="latest-skeleton" aria-hidden="true"></div>
+      <div class="latest-skeleton" aria-hidden="true"></div>
+    </div>
+
+    <div class="latest-more">
+      <a href="https://www.facebook.com/wisdomacadmy/videos" target="_blank" rel="noopener noreferrer" class="video-action-btn video-action-fb">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        See all videos on Facebook
+      </a>
     </div>
   </div>
 </section>
@@ -670,128 +795,6 @@
   <div class="container">
     <div class="ayat-header reveal">
       <div class="section-label">The Noble Quran</div>
-      <h2 class="section-title">Surah <span class="accent-text">Ad-Duha</span></h2>
-      <p class="section-sub">The Morning Brightness &middot; Surah 93 &middot; 11 verses &mdash; with English and Urdu translation.</p>
-    </div>
-
-    <div class="ayat-list">
-
-      <!-- Ad-Duha 93:1 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">1</div>
-        <p class="ayat-arabic" lang="ar">وَ الضُّحٰی ۙ﴿۱﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;By the growing morning bright (when the sun gains height and spreads its radiance), Or By (the growing sunshine of your Messengership rising like) the morning bright (whose radiance has replaced the darkness of ignorance with the enlightenment of guidance,)&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>قَسم ہے چاشت کے وقت کی (جب آفتاب بلند ہو کر اپنا نور پھیلاتا ہے)۔<br />(یا:- قَسم ہے وقتِ چاشت (کی طرح آپ کے آفتابِ رِسالت کے بلند ہونے) کی (جس کے نور نے گمراہی کے اندھیروں کو اجالے سے بدل دیا)</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:1</div>
-      </div>
-
-      <!-- Ad-Duha 93:2 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">2</div>
-        <p class="ayat-arabic" lang="ar">وَ الَّیۡلِ  اِذَا سَجٰی ۙ﴿۲﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;And by the night when it covers up.&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>اور قَسم ہے رات کی جب وہ چھا جائے۔</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:2</div>
-      </div>
-
-      <!-- Ad-Duha 93:3 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">3</div>
-        <p class="ayat-arabic" lang="ar">مَا وَدَّعَکَ رَبُّکَ وَ مَا قَلٰی ؕ﴿۳﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;(Ever since He has chosen you,) your Lord has not forsaken you. Nor is He displeased (ever since He has taken you as His Beloved).&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>آپ کے رب نے (جب سے آپ کو منتخب فرمایا ہے) آپ کو نہیں چھوڑا اور نہ ہی (جب سے آپ کو محبوب بنایا ہے) ناراض ہوا ہے</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:3</div>
-      </div>
-
-      <!-- Ad-Duha 93:4 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">4</div>
-        <p class="ayat-arabic" lang="ar">وَ  لَلۡاٰخِرَۃُ  خَیۡرٌ لَّکَ مِنَ الۡاُوۡلٰی ؕ﴿۴﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;Indeed, every following hour is a better (source of eminence and exaltation) for you than the preceding one.&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>اور بیشک (ہر) بعد کی گھڑی آپ کے لئے پہلے سے بہتر (یعنی باعثِ عظمت و رفعت) ہے</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:4</div>
-      </div>
-
-      <!-- Ad-Duha 93:5 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">5</div>
-        <p class="ayat-arabic" lang="ar">وَ  لَسَوۡفَ یُعۡطِیۡکَ رَبُّکَ فَتَرۡضٰی ؕ﴿۵﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;And soon your Lord shall bestow upon you (so much) that you will be well-pleased.&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>اور آپ کا رب عنقریب آپ کو (اتنا کچھ) عطا فرمائے گا کہ آپ راضی ہو جائیں گے</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:5</div>
-      </div>
-
-      <!-- Ad-Duha 93:6 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">6</div>
-        <p class="ayat-arabic" lang="ar">اَلَمۡ  یَجِدۡکَ یَتِیۡمًا فَاٰوٰی ۪﴿۶﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;(O Beloved!) Did He not find you an orphan, and then provided you (a dignifying and graceful) abode? Or Did He not find you (compassionate) and provided (in your person) a shelter for orphans?&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>(اے حبیب!) کیا اس نے آپ کو یتیم نہیں پایا پھر اس نے (آپ کو معزّز و مکرّم) ٹھکانا دیا۔ یا- کیا اس نے آپ کو (مہربان) نہیں پایا پھر اس نے (آپ کے ذریعے) یتیموں کو ٹھکانا دیا۔٭</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:6</div>
-      </div>
-
-      <!-- Ad-Duha 93:7 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">7</div>
-        <p class="ayat-arabic" lang="ar">وَ  وَجَدَکَ ضَآلًّا فَہَدٰی ۪﴿۷﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;And He found you engrossed and lost in His love and then made you achieve the coveted objective. Or And He found in you (a leader) for a straying people so He provided them guidance (through you).&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>اور اس نے آپ کو اپنی محبت میں خود رفتہ و گم پایا تو اس نے مقصود تک پہنچا دیا۔ یا- اور اس نے آپ کو بھٹکی ہوئی قوم کے درمیان (رہنمائی فرمانے والا) پایا تو اس نے (انہیں آپ کے ذریعے) ہدایت دے دی۔٭</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:7</div>
-      </div>
-
-      <!-- Ad-Duha 93:8 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">8</div>
-        <p class="ayat-arabic" lang="ar">وَ وَجَدَکَ عَآئِلًا فَاَغۡنٰی ؕ﴿۸﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;And He found you seeking (closeness with your Lord), and (then blessed you with the pleasure of His sight and) freed you of every need (forever). Or And He found you compassionate and benevolent, then (through you) made the destitute non-liable.&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>اور اس نے آپ کو (وصالِ حق کا) حاجت مند پایا تو اس نے (اپنی لذت دید سے نواز کر ہمیشہ کے لئے ہر طلب سے) بے نیاز کر دیا۔ یا- اور اس نے آپ کو (جواد و کریم) پایا تو اس نے (آپ کے ذریعے) محتاجوں کو غنی کر دیا۔٭</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:8</div>
-      </div>
-
-      <!-- Ad-Duha 93:9 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">9</div>
-        <p class="ayat-arabic" lang="ar">فَاَمَّا  الۡیَتِیۡمَ  فَلَا تَقۡہَرۡ ؕ﴿۹﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;So, never should you be strict with any orphan,&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>سو آپ بھی کسی یتیم پر سختی نہ فرمائیں</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:9</div>
-      </div>
-
-      <!-- Ad-Duha 93:10 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">10</div>
-        <p class="ayat-arabic" lang="ar">وَ اَمَّا السَّآئِلَ  فَلَا تَنۡہَرۡ ﴿ؕ۱۰﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;Nor reproach any beggar (seeking help at your door),&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>اور (اپنے در کے) کسی منگتے کو نہ جھڑکیں</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:10</div>
-      </div>
-
-      <!-- Ad-Duha 93:11 -->
-      <div class="ayat-card reveal">
-        <div class="ayat-num">11</div>
-        <p class="ayat-arabic" lang="ar">وَ اَمَّا بِنِعۡمَۃِ  رَبِّکَ  فَحَدِّثۡ ﴿٪۱۱﴾</p>
-        <div class="ayat-divider">✦ ✦ ✦</div>
-        <p class="ayat-translation"><span class="ayat-lang">English</span>&ldquo;And proclaim (well) the bounties of your Lord.&rdquo;</p>
-        <p class="ayat-urdu" lang="ur"><span class="ayat-lang">اردو</span>اور اپنے رب کی نعمتوں کا (خوب) تذکرہ کریں</p>
-        <div class="ayat-ref"><div class="ayat-ref-bar"></div>Surah Ad-Duha — 93:11</div>
-      </div>
-
-    </div>
-
-    <p class="ayat-note reveal" lang="ur">٭ ان تینوں تراجم میں یَتِیماً کو فَاٰوٰی کا، ضَآلًّا کو فَھَدٰی کا اور عَآئِلًا کو فَاَغْنٰی کا مفعولِ مقدم قرار دیا ہے۔ (ملاحظہ ہو: التفسیر الکبیر، القرطبی، البحر المحیط، روح البیان، الشفاء اور شرح خفاجی)</p>
-    <p class="ayat-source">Translation: Irfan-ul-Quran by Dr. Muhammad Tahir-ul-Qadri (English &amp; Urdu)</p>
-
-    <div class="ayat-header ayat-header--second reveal">
       <h2 class="section-title">Quranic <span class="accent-text">Verses of Knowledge</span></h2>
       <p class="section-sub">What the Quran says about knowledge, wisdom and those who seek it.</p>
     </div>
@@ -1002,6 +1005,75 @@
     document.documentElement.setAttribute('data-theme', nextTheme);
     localStorage.setItem('wisdom-theme', nextTheme);
   });
+
+  // Latest from Wisdom: 3 newest Facebook videos (data file kept fresh by a GitHub Action)
+  (function loadLatestVideos() {
+    const grid = document.getElementById('latest-grid');
+    if (!grid) return;
+    const FB_PAGE = 'https://www.facebook.com/wisdomacadmy';
+    const FB_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
+
+    const el = (tag, cls, text) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    };
+
+    const fbButton = (href, label) => {
+      const a = el('a', 'video-action-btn video-action-fb');
+      a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.innerHTML = FB_ICON;
+      a.append(' ' + label);
+      return a;
+    };
+
+    const videoCard = (v) => {
+      const card = el('article', 'video-card latest-card');
+      const media = el('div', 'latest-media');
+      if (v.width > 0 && v.height > 0) media.style.aspectRatio = v.width + ' / ' + v.height;
+      const frame = document.createElement('iframe');
+      frame.src = 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(v.url) + '&show_text=false&width=560';
+      frame.title = v.title || 'Video from Wisdom Academy Layyah';
+      frame.loading = 'lazy';
+      frame.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+      frame.allowFullscreen = true;
+      media.append(frame);
+
+      const body = el('div', 'video-body');
+      const d = v.created_time ? new Date(v.created_time) : null;
+      if (d && !isNaN(d)) body.append(el('div', 'latest-date', d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })));
+      const title = el('h3', 'video-title', v.title || 'Video from Wisdom Academy');
+      title.dir = 'auto';
+      body.append(title, fbButton(v.url, 'Watch on Facebook'));
+      card.append(media, body);
+      return card;
+    };
+
+    // Until the data file has videos, show Facebook's own page feed (free, no token needed)
+    const showFallback = () => {
+      const box = el('div', 'latest-fallback');
+      const frame = document.createElement('iframe');
+      frame.src = 'https://www.facebook.com/plugins/page.php?href=' + encodeURIComponent(FB_PAGE) +
+        '&tabs=timeline&width=500&height=640&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false';
+      frame.title = 'Wisdom Academy Layyah on Facebook';
+      frame.loading = 'lazy';
+      frame.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+      box.append(frame);
+      grid.replaceChildren(box);
+    };
+
+    fetch('data/latest-videos.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((data) => {
+        const videos = (Array.isArray(data && data.videos) ? data.videos : [])
+          .filter((v) => v && typeof v.url === 'string' && v.url.startsWith('https://www.facebook.com/'))
+          .slice(0, 3);
+        if (!videos.length) return showFallback();
+        grid.replaceChildren(...videos.map(videoCard));
+      })
+      .catch(showFallback);
+  })();
 </script>
 </body>
 </html>
