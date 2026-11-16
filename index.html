@@ -263,6 +263,17 @@
     .author-card li::before { content:'✦'; position:absolute; left:0; top:0.1rem; font-size:0.6rem; color:var(--accent); }
     .author-card em { font-style:italic; color:var(--text1); }
     .author-sub { font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--text3); margin:0.6rem 0 0.25rem; }
+    .author-book { display:grid; grid-template-columns:150px 1fr; gap:1.75rem; align-items:center; margin-top:1.5rem; padding:1.5rem; background:var(--bg-card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); }
+    .author-book-cover img { display:block; width:100%; height:auto; aspect-ratio:964/1280; object-fit:cover; border-radius:4px 10px 10px 4px; box-shadow:-4px 0 0 rgba(0,0,0,0.18) inset, var(--shadow-lg); transform:rotate(-2deg); transition:transform 0.35s ease; }
+    .author-book:hover .author-book-cover img { transform:rotate(0deg) translateY(-3px); }
+    .author-book-info .author-sub { margin-top:0; }
+    .author-book-title { font-family:'Cormorant Garamond',serif; font-size:1.75rem; font-weight:700; color:var(--text1); line-height:1.15; }
+    .author-book-title-ur { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu',serif; font-size:1.5rem; color:var(--accent); line-height:2.1; text-align:left; }
+    .author-book-meaning { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--text2); margin-bottom:0.5rem; }
+    .author-book-desc { font-size:0.9rem; color:var(--text2); line-height:1.7; margin-bottom:0.6rem; }
+    .author-book-by { font-size:0.82rem; color:var(--text3); }
+    .author-book-by strong { color:var(--text1); }
+    .author-book-by span { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu',serif; color:var(--accent); }
     .author-summary { margin-top:1.5rem; padding:1.4rem 1.75rem; border-radius:16px; border-left:3px solid var(--accent); background:var(--bg-card); box-shadow:var(--shadow); font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--text1); line-height:1.6; }
 
     .pbuh { font-family:'Amiri',serif; font-style:normal; color:var(--madder); }
@@ -312,6 +323,21 @@
     [data-theme="dark"] .video-action-tt { background:rgba(255,255,255,0.06); }
     .video-action-tt:hover { background:#000; color:#fff; transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,0.3); }
     [data-theme="dark"] .video-action-tt:hover { background:#fff; color:#000; }
+    .video-action-fb { background:linear-gradient(135deg,#1877F2,#42A1FF); color:#fff; box-shadow:0 4px 14px rgba(24,119,242,0.3); }
+    .video-action-fb:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(24,119,242,0.45); }
+
+    /* ============================================================ POPULAR VIDEO */
+    .popular-section { padding:5.5rem 0; background:var(--bg-page); position:relative; overflow:hidden; border-top:1px solid var(--border-subtle); transition:background 0.35s ease; }
+    .popular-header { text-align:center; margin-bottom:2.5rem; }
+    .popular-tag { display:inline-flex; align-items:center; gap:0.4rem; padding:0.35rem 0.95rem; margin-bottom:0.9rem; border-radius:50px; background:var(--madder); color:#fff; font-size:0.72rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; box-shadow:0 4px 14px rgba(162,51,43,0.28); }
+    [data-theme="dark"] .popular-tag { color:#0B1322; }
+    .popular-card { max-width:860px; margin:0 auto; }
+    .popular-card:hover { transform:translateY(-4px); }
+    .popular-media { padding:1.25rem 1.25rem 0; }
+    .popular-media video { display:block; width:100%; height:auto; aspect-ratio:16/9; border-radius:14px; background:#000; }
+    .popular-card .video-body { flex-direction:row; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding:1.25rem 1.5rem; }
+    .popular-card .video-desc { margin:0; flex:1 1 220px; }
+    .popular-card .video-action-btn { margin-top:0; }
 
     /* ============================================================ LATEST FROM WISDOM (YOUTUBE) */
     .latest-section { padding:5.5rem 0; background:var(--bg-sec); position:relative; overflow:hidden; border-top:1px solid var(--border-subtle); transition:background 0.35s ease; }
@@ -416,6 +442,9 @@
       .hero-socials { flex-direction:column; align-items:center; }
       .roles-grid { font-size:0.85rem; }
       .author-cards { grid-template-columns:1fr; }
+      .author-book { grid-template-columns:1fr; text-align:center; justify-items:center; }
+      .author-book-cover { width:150px; }
+      .author-book-title-ur { text-align:center; }
     }
     @media (max-width:480px) {
       .role-row { grid-template-columns:1fr; }
@@ -558,6 +587,38 @@
       </div>
     </a>
     </div>
+  </div>
+</section>
+
+<!-- ============================================================ POPULAR VIDEO -->
+<!-- Self-hosted copy (480p, compressed for the web). Downloads only when the visitor presses play. -->
+<section class="popular-section" id="popular">
+  <div class="star-pattern"></div>
+  <div class="container">
+    <div class="popular-header reveal">
+      <div class="popular-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7L12 17.4 5.8 21.1l1.6-7L2 9.3l7.1-.7z"/></svg>
+        Popular
+      </div>
+      <h2 class="section-title">Popular <span class="accent-text">Video</span></h2>
+      <p class="section-sub">Our most-watched video with Wasim Faizi.</p>
+    </div>
+
+    <article class="video-card popular-card reveal">
+      <div class="popular-media">
+        <video controls playsinline preload="none" poster="images/popular-poster.jpg" width="854" height="480">
+          <source src="videos/popular.mp4" type="video/mp4" />
+          Your browser can't play this video. <a href="videos/popular.mp4">Download it instead.</a>
+        </video>
+      </div>
+      <div class="video-body">
+        <p class="video-desc">Wasim Faizi on Layyah TV &middot; 29 min</p>
+        <a href="https://www.facebook.com/share/19zrdZDFD8/" target="_blank" rel="noopener noreferrer" class="video-action-btn video-action-fb">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Watch on Facebook
+        </a>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -746,6 +807,21 @@
             </ul>
           </div>
 
+        </div>
+
+        <!-- Published work -->
+        <div class="author-book">
+          <div class="author-book-cover">
+            <img src="images/book%202.jpg" alt="Cover of the book Paighambar-e-Akhir by Wasim Faizi" width="964" height="1280" loading="lazy" />
+          </div>
+          <div class="author-book-info">
+            <div class="author-sub">Published Work</div>
+            <h3 class="author-book-title">Paighambar-e-Akhir <span class="pbuh">ﷺ</span></h3>
+            <div class="author-book-title-ur" lang="ur" dir="rtl">پیغمبرِ آخر ﷺ</div>
+            <p class="author-book-meaning">&ldquo;The Final Prophet&rdquo;</p>
+            <p class="author-book-desc">His best-known book, on the philosophy of Khatm-e-Nabuwat (the finality of Prophethood) and the refutation of Qadianism.</p>
+            <div class="author-book-by">by <strong>Wasim Faizi</strong> &middot; <span lang="ur">وسیم فیضی</span></div>
+          </div>
         </div>
 
         <p class="author-summary">
