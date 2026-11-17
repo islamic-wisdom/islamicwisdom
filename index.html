@@ -310,7 +310,7 @@
 
     .lessons-grid { display:grid; grid-template-columns:repeat(2,minmax(0,340px)); justify-content:center; gap:2rem; }
     .lesson-media { position:relative; width:100%; aspect-ratio:9/16; background:#000; }
-    .lesson-media iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+    .lesson-media video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000; display:block; }
     .lesson-title-ur { font-family:'Noto Nastaliq Urdu',serif; font-size:1.2rem; font-weight:600; color:var(--text1); line-height:2.1; direction:rtl; text-align:right; }
     .lesson-title-en { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic; color:var(--text2); margin:0.1rem 0 1.1rem; text-align:right; }
 
@@ -889,7 +889,7 @@
       <!-- Lesson 1 -->
       <article class="video-card lesson-card reveal">
         <div class="lesson-media">
-          <iframe src="https://www.tiktok.com/player/v1/7682496509715254549?rel=0&amp;description=0&amp;music_info=0" title="Lesson 1: The many forms of love" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          <video controls playsinline preload="none" poster="images/lesson-1-poster.jpg" width="576" height="1024" title="Lesson 1: The many forms of love"><source src="videos/lesson-1.mp4" type="video/mp4" />Your browser can't play this video. <a href="videos/lesson-1.mp4">Download it instead.</a></video>
         </div>
         <div class="video-body">
           <h3 class="lesson-title-ur" lang="ur">محبت کے بڑے مختلف انداز ہیں</h3>
@@ -904,7 +904,7 @@
       <!-- Lesson 2 -->
       <article class="video-card lesson-card reveal">
         <div class="lesson-media">
-          <iframe src="https://www.tiktok.com/player/v1/7694472127658855686?rel=0&amp;description=0&amp;music_info=0" title="Lesson 2: What the Quran teaches us" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          <video controls playsinline preload="none" poster="images/lesson-2-poster.jpg" width="720" height="1280" title="Lesson 2: What the Quran teaches us"><source src="videos/lesson-2.mp4" type="video/mp4" />Your browser can't play this video. <a href="videos/lesson-2.mp4">Download it instead.</a></video>
         </div>
         <div class="video-body">
           <h3 class="lesson-title-ur" lang="ur">قرآنِ مجید نے ہمیں سکھایا</h3>
