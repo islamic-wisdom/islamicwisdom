@@ -1,27 +1,27 @@
 {
-  "updated": "2026-11-15T18:23:32.939Z",
+  "updated": "2026-11-21T19:25:31.337Z",
   "channel": "https://www.youtube.com/@wasimfaizi-c4e",
   "videos": [
+    {
+      "id": "owobDI9Ec8s",
+      "title": "مفاہیم صلوٰۃ و سلام",
+      "published": "2026-11-21T15:18:20+00:00",
+      "url": "https://www.youtube.com/watch?v=owobDI9Ec8s",
+      "short": false
+    },
+    {
+      "id": "EV5XmUo1P0o",
+      "title": "شانِ والدین",
+      "published": "2026-11-21T14:22:26+00:00",
+      "url": "https://www.youtube.com/watch?v=EV5XmUo1P0o",
+      "short": false
+    },
     {
       "id": "M8zxrpJlP98",
       "title": "ٹوٹی پھوٹی بندگی",
       "published": "2026-11-13T23:18:58+00:00",
       "url": "https://www.youtube.com/watch?v=M8zxrpJlP98",
       "short": false
-    },
-    {
-      "id": "8wVfmdNOPFg",
-      "title": "اللّٰہ سے امید لگائے ہوئے ۔۔۔ درود و سلام",
-      "published": "2026-11-13T23:18:49+00:00",
-      "url": "https://www.youtube.com/watch?v=8wVfmdNOPFg",
-      "short": false
-    },
-    {
-      "id": "cke3BgCpNOc",
-      "title": "14 November 2026",
-      "published": "2026-11-13T23:16:15+00:00",
-      "url": "https://www.youtube.com/watch?v=cke3BgCpNOc",
-      "short": true
     }
   ]
 }
