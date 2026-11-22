@@ -1,7 +1,14 @@
 {
-  "updated": "2026-11-21T19:25:31.337Z",
+  "updated": "2026-11-22T11:37:42.004Z",
   "channel": "https://www.youtube.com/@wasimfaizi-c4e",
   "videos": [
+    {
+      "id": "dxL2Cw-tk3A",
+      "title": "صلوٰۃ و سلام",
+      "published": "2026-11-22T05:38:23+00:00",
+      "url": "https://www.youtube.com/watch?v=dxL2Cw-tk3A",
+      "short": false
+    },
     {
       "id": "owobDI9Ec8s",
       "title": "مفاہیم صلوٰۃ و سلام",
@@ -14,13 +21,6 @@
       "title": "شانِ والدین",
       "published": "2026-11-21T14:22:26+00:00",
       "url": "https://www.youtube.com/watch?v=EV5XmUo1P0o",
-      "short": false
-    },
-    {
-      "id": "M8zxrpJlP98",
-      "title": "ٹوٹی پھوٹی بندگی",
-      "published": "2026-11-13T23:18:58+00:00",
-      "url": "https://www.youtube.com/watch?v=M8zxrpJlP98",
       "short": false
     }
   ]
