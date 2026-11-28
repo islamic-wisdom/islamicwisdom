@@ -128,7 +128,7 @@
     .brand { display:flex; align-items:center; gap:0.7rem; flex-shrink:0; }
     .logo-svg { width:40px; height:40px; flex-shrink:0; color:var(--accent); transition:transform 0.5s ease; }
     .brand:hover .logo-svg { transform:rotate(-8deg) scale(1.05); }
-    .hero-logo-bg, .about-circle-inner svg { color:var(--accent); }
+    .hero-logo-bg { color:var(--accent); }
     .brand-text { display:flex; flex-direction:column; line-height:1; }
     .brand-name { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; letter-spacing:0.06em; color:var(--accent); text-transform:uppercase; white-space:nowrap; }
     .brand-sub { margin-top:0.3rem; font-size:0.72rem; font-weight:500; color:var(--text3); white-space:nowrap; }
@@ -233,26 +233,58 @@
     .quote-ref { font-size:0.8rem; color:var(--accent); font-weight:600; letter-spacing:0.08em; }
 
     /* ============================================================ ABOUT */
-    .about-section { position:relative; padding:6rem 0; background:var(--bg-about); overflow:hidden; transition:background 0.35s ease; }
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
-    .about-decor { position:relative; display:flex; align-items:center; justify-content:center; }
-    .about-circle { width:320px; height:320px; border-radius:50%; background:radial-gradient(circle,rgba(var(--accent2-rgb),0.10) 0%,rgba(var(--accent-rgb),0.06) 60%,transparent 100%); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; position:relative; }
-    .about-circle-inner { width:240px; height:240px; border-radius:50%; background:var(--bg-card); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); transition:background 0.35s ease; }
-    .about-ring { position:absolute; inset:-20px; border-radius:50%; border:1px dashed var(--border); animation:ringRotate 30s linear infinite; }
-    @keyframes ringRotate { to{transform:rotate(360deg)} }
-    .ring-dot { position:absolute; top:-5px; left:50%; transform:translateX(-50%); width:8px; height:8px; border-radius:50%; background:var(--accent); opacity:0.6; }
-    .about-content { display:flex; flex-direction:column; gap:1.25rem; }
-    .about-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.2; color:var(--text1); }
-    .about-subtitle { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic; color:var(--accent); }
-    .about-text { font-size:0.98rem; color:var(--text2); line-height:1.85; }
-    .about-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1rem 1.25rem; border-left:3px solid var(--accent); box-shadow:var(--shadow); transition:background 0.35s ease; }
-    .about-card p { font-size:0.88rem; color:var(--text2); line-height:1.7; font-style:italic; }
-    .pillars-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.65rem; margin:0.25rem 0; }
-    .cred-item { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:0.65rem 0.9rem; display:flex; align-items:center; justify-content:space-between; gap:0.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:all 0.25s ease; }
-    .cred-item:hover { border-color:var(--accent-2); background:var(--bg-card-solid); transform:translateY(-2px); }
-    .cred-en { font-size:0.84rem; font-weight:600; color:var(--text1); display:flex; align-items:center; gap:0.35rem; }
-    .cred-en::before { content:'✦'; color:var(--accent); font-size:0.65rem; }
-    @media (max-width:640px) { .pillars-grid { grid-template-columns:1fr; } }
+    .about-section { position:relative; padding:6.5rem 0; background:var(--bg-about); overflow:hidden; transition:background 0.35s ease; }
+    .about-grid { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:4.5rem; align-items:center; }
+
+    /* Mihrab panel holding the hadith */
+    .about-mihrab { position:relative; max-width:440px; margin:0 auto; padding:4.25rem 2.5rem 2.5rem; text-align:center; color:#EAF1FB;
+      border-radius:50% 50% 26px 26px / 26% 26% 26px 26px;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='rgba(255%2C255%2C255%2C0.09)' stroke-width='0.8'%3E%3Cpath d='M28 0L56 28L28 56L0 28Z'/%3E%3Cpath d='M28 14L42 28L28 42L14 28Z'/%3E%3Ccircle cx='28' cy='28' r='4'/%3E%3C/g%3E%3C/svg%3E") center / 56px 56px, radial-gradient(ellipse at 50% 0%, rgba(76,195,191,0.35) 0%, transparent 55%), linear-gradient(170deg,#1F4F9E 0%,#163A75 55%,#0F2A57 100%);
+      box-shadow:0 24px 60px rgba(15,42,87,0.35); }
+    .about-mihrab::before { content:''; position:absolute; inset:12px; border-radius:50% 50% 18px 18px / 25% 25% 18px 18px; border:1px solid rgba(255,255,255,0.22); pointer-events:none; }
+    .about-mihrab::after { content:''; position:absolute; left:50%; bottom:-14px; width:62%; height:14px; transform:translateX(-50%); border-radius:0 0 14px 14px; background:var(--madder); opacity:0.9; }
+    [data-theme="dark"] .about-mihrab { box-shadow:0 24px 60px rgba(0,0,0,0.55); outline:1px solid rgba(134,171,242,0.25); outline-offset:6px; }
+    .mihrab-mark { width:54px; height:54px; margin:0 auto 1rem; color:#9FD9D6; }
+    .mihrab-said { font-size:0.8rem; color:#BFD0EA; margin-bottom:0.9rem; }
+    .mihrab-said .pbuh { color:#F2A493; }
+    .mihrab-arabic { font-family:'Amiri','Scheherazade New',serif; font-size:clamp(1.45rem,2.4vw,1.75rem); line-height:2; color:#FFFFFF; direction:rtl; margin-bottom:1rem; }
+    .mihrab-en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.12rem; line-height:1.55; color:#DCE6F5; margin-bottom:0.75rem; }
+    .mihrab-ur { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu',serif; font-size:1.05rem; line-height:2.3; color:#DCE6F5; direction:rtl; margin-bottom:1rem; }
+    .mihrab-src { display:inline-block; padding-top:0.85rem; border-top:1px solid rgba(255,255,255,0.18); font-size:0.78rem; font-weight:600; color:#9FD9D6; }
+    .mihrab-src span { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu',serif; font-weight:400; font-size:0.95rem; }
+
+    /* Text side */
+    .about-content { display:flex; flex-direction:column; gap:1.15rem; }
+    .about-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.1rem,4vw,3.1rem); font-weight:700; line-height:1.15; color:var(--text1); }
+    .about-tagline-ur { font-family:'Noori Nastaleeq','Noto Nastaliq Urdu',serif; font-size:1.3rem; line-height:2.1; color:var(--accent-2); direction:rtl; text-align:left; }
+    .about-text { font-size:1rem; color:var(--text2); line-height:1.85; max-width:34em; }
+
+    /* Six pillars: one joined tile panel, each tile bilingual */
+    .pillars-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin:0.4rem 0 0.2rem; border:1px solid var(--border); border-radius:16px; overflow:hidden; background:var(--bg-card); box-shadow:var(--shadow); }
+    .pillar { position:relative; padding:1rem 1.1rem 0.85rem; border-right:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); transition:background 0.25s ease; }
+    .pillar:nth-child(3n) { border-right:none; }
+    .pillar:nth-child(n+4) { border-bottom:none; }
+    .pillar:hover { background:rgba(var(--accent-rgb),0.05); }
+    .pillar-star { display:block; width:14px; height:14px; margin-bottom:0.55rem; color:var(--accent); }
+    .pillar:nth-child(3n+2) .pillar-star { color:var(--accent-2); }
+    .pillar:nth-child(3n) .pillar-star { color:var(--madder); }
+    .pillar-en { display:block; font-size:0.86rem; font-weight:600; color:var(--text1); line-height:1.3; }
+    .pillar-ur { display:block; font-family:'Noori Nastaleeq','Noto Nastaliq Urdu',serif; font-size:1rem; line-height:2; color:var(--text3); direction:rtl; text-align:left; }
+
+    .about-actions { display:flex; flex-wrap:wrap; align-items:center; gap:0.75rem 1.5rem; margin-top:0.4rem; }
+    .about-btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; border-radius:50px; background:var(--accent); color:var(--on-accent); font-size:0.9rem; font-weight:600; box-shadow:0 6px 18px rgba(var(--accent-rgb),0.3); transition:transform 0.25s ease, box-shadow 0.25s ease; }
+    .about-btn:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(var(--accent-rgb),0.4); }
+    .about-link { font-size:0.9rem; font-weight:600; color:var(--accent); border-bottom:1px solid rgba(var(--accent-rgb),0.35); padding-bottom:2px; transition:border-color 0.2s ease; }
+    .about-link:hover { border-color:var(--accent); }
+    .about-btn:focus-visible, .about-link:focus-visible { outline:2px solid var(--accent-2); outline-offset:3px; }
+
+    @media (max-width:640px) {
+      .pillars-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .pillar:nth-child(n) { border-right:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); }
+      .pillar:nth-child(2n) { border-right:none; }
+      .pillar:nth-child(n+5) { border-bottom:none; }
+      .about-mihrab { padding:3.5rem 1.5rem 2rem; }
+    }
 
     /* ============================================================ AUTHOR */
     .author-section { position:relative; padding:6rem 0; background:var(--bg-sec); overflow:hidden; transition:background 0.35s ease; }
@@ -466,8 +498,8 @@
     }
     @media (max-width:1024px) {
       .connect-grid { grid-template-columns:1fr; max-width:480px; margin:0 auto; }
-      .about-grid { grid-template-columns:1fr; }
-      .about-decor { display:none; }
+      .about-grid { grid-template-columns:1fr; gap:3.5rem; }
+      .about-content { order:-1; }
       .author-grid { grid-template-columns:1fr; gap:2.5rem; }
       .author-profile { position:static; max-width:420px; margin:0 auto; }
     }
@@ -737,47 +769,65 @@
   <div class="star-pattern"></div>
   <div class="container">
     <div class="about-grid">
-      <div class="about-decor reveal">
-        <div class="about-circle">
-          <div class="about-ring"><div class="ring-dot"></div></div>
-          <div class="about-circle-inner">
-            <svg width="120" height="120" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><use href="#wisdom-mark"/></svg>
-          </div>
-        </div>
-      </div>
+      <figure class="about-mihrab reveal">
+        <svg class="mihrab-mark" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><use href="#wisdom-mark"/></svg>
+        <p class="mihrab-said">The Prophet <span class="pbuh" lang="ur" dir="rtl">صلی اللہ علیہ وآلہ وسلم</span> said:</p>
+        <blockquote>
+          <p class="mihrab-arabic" lang="ar">مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا، سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ</p>
+          <p class="mihrab-en">&ldquo;Whoever follows a path seeking knowledge, Allah will make easy for him a path to Paradise.&rdquo;</p>
+          <p class="mihrab-ur" lang="ur">جو شخص علم کی تلاش میں کسی راستے پر چلا، اللہ تعالیٰ اس کے لیے جنت کا راستہ آسان فرما دیتا ہے۔</p>
+        </blockquote>
+        <figcaption class="mihrab-src">Sahih Muslim 2699 &nbsp;|&nbsp; <span lang="ur">صحیح مسلم</span></figcaption>
+      </figure>
 
       <div class="about-content reveal">
         <div class="section-label">Our Mission</div>
         <h2 class="about-title">About <span class="accent-text">Islamic Wisdom</span></h2>
-        <p class="about-text" style="font-size:0.98rem; color:var(--text2); line-height:1.85; margin:0.35rem 0 0.75rem;">
+        <p class="about-tagline-ur" lang="ur">قرآن و سنت کی روشنی میں مستند دینی رہنمائی</p>
+        <p class="about-text">
           Islamic Wisdom is an authentic platform dedicated to sharing beneficial knowledge, Quranic reflections, and timeless spiritual guidance grounded in the Noble Quran and authenticated Sunnah.
         </p>
 
-        <!-- Core Pillars -->
+        <!-- Core pillars -->
         <div class="pillars-grid">
-          <div class="cred-item">
-            <span class="cred-en">Quran &amp; Sunnah</span>
+          <div class="pillar">
+            <svg class="pillar-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l3.1 5.4 6.1-1.3-1.3 6.1L24 12l-4.1 1.8 1.3 6.1-6.1-1.3L12 24l-3.1-5.4-6.1 1.3 1.3-6.1L0 12l4.1-1.8-1.3-6.1 6.1 1.3z"/></svg>
+            <span class="pillar-en">Quran &amp; Sunnah</span>
+            <span class="pillar-ur" lang="ur">قرآن و سنت</span>
           </div>
-          <div class="cred-item">
-            <span class="cred-en">Authentic Knowledge</span>
+          <div class="pillar">
+            <svg class="pillar-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l3.1 5.4 6.1-1.3-1.3 6.1L24 12l-4.1 1.8 1.3 6.1-6.1-1.3L12 24l-3.1-5.4-6.1 1.3 1.3-6.1L0 12l4.1-1.8-1.3-6.1 6.1 1.3z"/></svg>
+            <span class="pillar-en">Authentic Knowledge</span>
+            <span class="pillar-ur" lang="ur">مستند علم</span>
           </div>
-          <div class="cred-item">
-            <span class="cred-en">Spiritual Guidance</span>
+          <div class="pillar">
+            <svg class="pillar-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l3.1 5.4 6.1-1.3-1.3 6.1L24 12l-4.1 1.8 1.3 6.1-6.1-1.3L12 24l-3.1-5.4-6.1 1.3 1.3-6.1L0 12l4.1-1.8-1.3-6.1 6.1 1.3z"/></svg>
+            <span class="pillar-en">Spiritual Guidance</span>
+            <span class="pillar-ur" lang="ur">روحانی رہنمائی</span>
           </div>
-          <div class="cred-item">
-            <span class="cred-en">Daily Reflections</span>
+          <div class="pillar">
+            <svg class="pillar-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l3.1 5.4 6.1-1.3-1.3 6.1L24 12l-4.1 1.8 1.3 6.1-6.1-1.3L12 24l-3.1-5.4-6.1 1.3 1.3-6.1L0 12l4.1-1.8-1.3-6.1 6.1 1.3z"/></svg>
+            <span class="pillar-en">Daily Reflections</span>
+            <span class="pillar-ur" lang="ur">روزانہ کی فکر</span>
           </div>
-          <div class="cred-item">
-            <span class="cred-en">Practical Guidance</span>
+          <div class="pillar">
+            <svg class="pillar-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l3.1 5.4 6.1-1.3-1.3 6.1L24 12l-4.1 1.8 1.3 6.1-6.1-1.3L12 24l-3.1-5.4-6.1 1.3 1.3-6.1L0 12l4.1-1.8-1.3-6.1 6.1 1.3z"/></svg>
+            <span class="pillar-en">Practical Guidance</span>
+            <span class="pillar-ur" lang="ur">عملی رہنمائی</span>
           </div>
-          <div class="cred-item">
-            <span class="cred-en">Moral Excellence</span>
+          <div class="pillar">
+            <svg class="pillar-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0l3.1 5.4 6.1-1.3-1.3 6.1L24 12l-4.1 1.8 1.3 6.1-6.1-1.3L12 24l-3.1-5.4-6.1 1.3 1.3-6.1L0 12l4.1-1.8-1.3-6.1 6.1 1.3z"/></svg>
+            <span class="pillar-en">Moral Excellence</span>
+            <span class="pillar-ur" lang="ur">اعلیٰ اخلاق</span>
           </div>
         </div>
 
-        <div class="about-card">
-          <p>"Whoever follows a path seeking knowledge, Allah will make easy for him a path to Paradise."</p>
-          <span>— Sahih Muslim 2699 | صحيح مسلم</span>
+        <div class="about-actions">
+          <a href="#popular" class="about-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Watch the lessons
+          </a>
+          <a href="#author" class="about-link">Meet Wasim Faizi</a>
         </div>
       </div>
     </div>
